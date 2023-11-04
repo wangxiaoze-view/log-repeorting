@@ -10,6 +10,7 @@ export default [
     output: {
       dir: 'dist',
       format: 'cjs',
+      name: 'logReporting',
       entryFileNames: '[name].cjs.js',
     },
     plugins: [resolve(), commonjs(), typescript(), json(), uglify()],
@@ -19,7 +20,28 @@ export default [
     output: {
       dir: 'dist',
       format: 'esm',
+      name: 'logReporting',
       entryFileNames: '[name].esm.js',
+    },
+    plugins: [resolve(), commonjs(), typescript(), json(), uglify()],
+  },
+  {
+    input: './src/index.ts',
+    output: {
+      dir: 'dist',
+      format: 'umd',
+      name: 'logReporting',
+      entryFileNames: '[name].umd.js',
+    },
+    plugins: [resolve(), commonjs(), typescript(), json(), uglify()],
+  },
+  {
+    input: './src/index.ts',
+    output: {
+      dir: 'dist',
+      format: 'amd',
+      name: 'logReporting',
+      entryFileNames: '[name].amd.js',
     },
     plugins: [resolve(), commonjs(), typescript(), json(), uglify()],
   },
