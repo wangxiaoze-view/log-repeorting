@@ -1,0 +1,30 @@
+{
+  "name": "log-reporting",
+  "version": "1.0.0",
+  "description": "前端日志上报SDK",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/types/index.d.ts",
+  "scripts": {
+    "dev": "rollup -w -c",
+    "build": "rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "eslint": "^8.52.0",
+    "prettier": "^3.0.3",
+    "rollup": "^4.2.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.10",
+    "tslib": "^2.6.2"
+  }
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link rel="stylesheet" href="http://xxx.aa.com/123.css">-->
+<!--    <link rel="stylesheet" href="http://xxx.aa.com/222.css">-->
+</head>
+<body>
+
+
+<button id="btn1">资源</button>
+<button id="btn2">js报错</button>
+<button id="btn3">promise</button>
+<button id="btn4">axios</button>
+<button id="btn5">axios-post</button>
+<button id="btn6">fetch</button>
+
+
+<!--<script src="http://xxx.aa.com/222.js"></script>-->
+<script type="module">
+
+
+    import logReporting from '../dist/index.esm.js'
+    logReporting.init({
+        sdn: location.href,
+        debug: true,
+        config: {
+            watchReady: true,
+            watchJsError: true,
+            watchSource: true,
+            watchAxios: true,
+            watchPerformance: true,
+        }
+    })
+
+    document.querySelector('#btn1').addEventListener('click', function () {
+        let link = document.createElement('link')
+        link.href = 'http://xxx.aa.com/123.css'
+        link.rel = "stylesheet"
+        document.head.append(link)
+    })
+    document.querySelector('#btn2').addEventListener('click', function () {
+        jsRunningerrorssss
+    })
+
+    document.querySelector('#btn3').addEventListener('click', function () {
+        new Promise((resolve, reject) => {
+           try {
+               aaa
+           } catch (e) {
+               reject(e)
+           }
+        })
+    })
+
+    document.querySelector('#btn4').addEventListener('click', function () {
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+        xhr.timeout = 3000;
+        xhr.open("get", '/ajaxerror?p=1&t=2', true);
+        xhr.setRequestHeader("content-type", "application/json;charset=utf-8");
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.send();
+    })
+
+
+    document.querySelector('#btn5').addEventListener('click', function () {
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+        xhr.timeout = 3000;
+        xhr.open("post", '/servererr', true);
+        xhr.setRequestHeader("content-type", "application/json;charset=utf-8");
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.send({a: 1, b: 2});
+    })
+
+    document.querySelector('#btn6').addEventListener('click', function () {
+        fetch('/axxx', {
+            body: "aa"
+        })
+    })
+
+
+
+</script>
+</body>
+</html>
