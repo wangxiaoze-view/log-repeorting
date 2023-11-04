@@ -17,15 +17,9 @@ export function renderScripts() {
   const scripts = document.querySelectorAll('body script[src]');
   for (let i = 0; i < scripts.length; i++) {
     const script = scripts[i];
-
     const el = document.createElement('script');
     el.setAttribute('type', 'text/javascript');
     el.setAttribute('src', (script as HTMLScriptElement).src);
-
-    el.onload = function (e) {
-      console.log(e, 1111, el);
-    };
-
     head.removeChild(script);
     head.appendChild(el);
   }
@@ -34,6 +28,6 @@ export function renderScripts() {
 export function eachLoadResource(e: ErrorEvent | Event) {
   requestIdleCallback(() => {
     renderLinks();
-    renderScripts();
+    // renderScripts();
   });
 }
