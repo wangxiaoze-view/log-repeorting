@@ -14,7 +14,7 @@ export function getNavigator() {
     language: support('language'),
     product: support('product'),
     productSub: support('productSub'),
-    plugins: support('plugins'),
+    // plugins: support('plugins'),
     windowWidth: window.screen.width,
     windowHeight: window.screen.height,
     colorDepth: window.screen.colorDepth,
