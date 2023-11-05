@@ -76,7 +76,7 @@ function initWatchAxios() {
           // 请求路径
           path: _config.src,
           // 请求状态
-          status: this.status + '-' + this.statusText,
+          status: this.status,
           // 响应体
           response: this.response ? JSON.stringify(this.response) : '',
           // 参数
