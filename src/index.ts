@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import { ErrorData, LogConfig, LogOptions } from './types';
 import { watchJsError, watchReadyError, removeJsError } from './lib/watchJsError';
 import { cancelRequest, watchAxios } from './lib/watchAxios';
+import * as rrweb from 'rrweb';
 
 class LogReporting {
   public debug: boolean;
@@ -11,6 +12,8 @@ class LogReporting {
   public watchAxios: boolean;
   public watchPerformance: boolean;
   public config: Record<string, any>;
+  public snapshot: Record<string, any>[];
+  public stopFn: any;
 
   constructor() {
     // 是否开启debugger, 默认不开启
@@ -27,6 +30,9 @@ class LogReporting {
     this.watchPerformance = false;
     // 初始操作的配置
     this.config = new Map();
+    // 快照
+    this.snapshot = [];
+    this.stopFn = null;
 
     this.console('info', '欢迎使用【log-reporting】日志上报系统!');
   }
@@ -34,6 +40,7 @@ class LogReporting {
   // 初始化
   async init(config: LogOptions) {
     try {
+      this.initRRWeb();
       await this.validateConfig(config);
     } catch (e) {
       this.console('error', (e as any).message, config);
@@ -45,6 +52,22 @@ class LogReporting {
     this.watchJsError && watchJsError();
     // 监听请求报错
     this.watchAxios && watchAxios();
+  }
+
+  // 初始化rrweb
+  initRRWeb() {
+    const _this = this;
+    this.stopFn = rrweb.record({
+      emit(event, isCheckout) {
+        // isCheckout 是一个标识，告诉你重新制作了快照
+        if (isCheckout) {
+          _this.snapshot = [];
+        }
+        _this.snapshot.push(event);
+      },
+      checkoutEveryNms: 0.5 * 60 * 1000, // 每30s重新制作快照
+      // checkoutEveryNth: 200, // 每 200 个 event 重新制作快照
+    });
   }
 
   // 校验参数完整性
