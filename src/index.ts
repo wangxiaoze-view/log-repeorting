@@ -65,7 +65,7 @@ class LogReporting {
         }
         _this.snapshot.push(event);
       },
-      checkoutEveryNms: 0.5 * 60 * 1000, // 每30s重新制作快照
+      checkoutEveryNms: 0.25 * 60 * 1000, // 每15s重新制作快照
       // checkoutEveryNth: 200, // 每 200 个 event 重新制作快照
     });
   }
