@@ -10,7 +10,7 @@
     <img src="https://img.shields.io/badge/tslib-2.6.2-brightgreen.svg" alt="vue">
   </a>
 </p>
-<h1>log-reporting （version: v1.0.0）</h1>
+<h1>log-reporting （version: v2.0.0）</h1>
 </div>
 
 ## 🔈 注意事项
@@ -25,6 +25,38 @@
 1. 资源：资源地址不正确或不存在导致的资源异常
 2. 代码：搜集报错信息，页面的崩溃等等；
 3. 请求：请求参数错误，访问地址不存在，异常拦截
+
+
+## 🔈 如何使用
+
+该版本目前仅仅用于浏览器版本；
+
+``` js
+<script src="dist/index.umd.js"></script>
+
+<script>
+    logReporting.init({
+        // 上报地址
+        dsn: 'http://localhost:8888/postLog',
+        // 是否开启调试, 控制台会打印出日志信息
+        debug: false,
+        // 上报方式：fetch sendBeacon
+        logMethod: 'fetch', 
+        config: {
+            // 是否开启录制
+            isRecord: true,
+            // 页面准备好，是否就立即监听
+            watchReady: true,
+            // 监听js
+            watchJsError: true,
+            // 监听资源报错
+            watchSource: true,
+            // 监听请求报错
+            watchAxios: true,
+        }
+    })
+</script>
+```
 
 
 ---
