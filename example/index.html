@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-<!--    <link rel="stylesheet" href="http://xxx.aa.com/123.css">-->
-<!--    <link rel="stylesheet" href="http://xxx.aa.com/222.css">-->
-    <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.js"></script>
-
+    <style>
+        button {
+            padding: 6px 10px;
+            cursor: pointer;
+            outline: none;
+            border: 1px solid cadetblue;
+            background: cadetblue;
+            border-radius: 4px;
+            color: #fff;
+        }
+    </style>
+    <!--    <link rel="stylesheet" href="http://xxx.aa.com/123.css">-->
+    <!--    <link rel="stylesheet" href="http://xxx.aa.com/222.css">-->
+    <link rel="stylesheet" href="./rrweb.min.css">
+    <script src="./rrweb.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
 </head>
 <body>
 
@@ -23,76 +31,98 @@
 <button id="btn6">fetch</button>
 <button id="btn7">播放</button>
 
-<!--<script src="http://xxx.aa.com/222.js"></script>-->
 <script type="module">
-
-
     import logReporting from '../dist/index.esm.js'
+
     logReporting.init({
+        // 上报地址
         dsn: location.href,
-        debug: true,
+        // 是否开启调试
+        debug: false,
         config: {
+            // 是否开启录制
+            isRecord: true,
+            // 页面准备好，是否就立即监听
             watchReady: true,
+            // 监听js
             watchJsError: true,
+            // 监听资源报错
             watchSource: true,
+            // 监听请求报错
             watchAxios: true,
-            watchPerformance: true,
         }
     })
 
-    document.querySelector('#btn1').addEventListener('click', function () {
+    const btn1 = document.querySelector('#btn1')
+    const btn2 = document.querySelector('#btn2')
+    const btn3 = document.querySelector('#btn3')
+    const btn4 = document.querySelector('#btn4')
+    const btn5 = document.querySelector('#btn5')
+    const btn6 = document.querySelector('#btn6')
+    const btn7 = document.querySelector('#btn7')
+
+    btn1.addEventListener('click', function () {
         let link = document.createElement('link')
-        link.href = 'http://xxx.aa.com/123.css'
+        link.href = 'https://xxx.xxxxxx.com/123.css'
         link.rel = "stylesheet"
         document.head.append(link)
     })
-    document.querySelector('#btn2').addEventListener('click', function () {
-        jsRunningerrorssss
+    btn2.addEventListener('click', function () {
+        isWatchError
     })
 
-    document.querySelector('#btn3').addEventListener('click', function () {
+    btn3.addEventListener('click', function () {
         new Promise((resolve, reject) => {
-           try {
-               aaa
-           } catch (e) {
-               reject(e)
-           }
+            try {
+                isWatchError
+            } catch (e) {
+                reject(e)
+            }
         })
     })
 
-    document.querySelector('#btn4').addEventListener('click', function () {
-        var xhr = new XMLHttpRequest();
+    btn4.addEventListener('click', function () {
+        const xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
         xhr.timeout = 3000;
-        xhr.open("get", '/ajaxerror?p=1&t=2', true);
+        xhr.open("get", '/v1/api/getUserInfo?p=1&t=2', true);
         xhr.setRequestHeader("content-type", "application/json;charset=utf-8");
         xhr.setRequestHeader("Accept", "application/json");
         xhr.send();
     })
 
 
-    document.querySelector('#btn5').addEventListener('click', function () {
-        var xhr = new XMLHttpRequest();
+    btn5.addEventListener('click', function () {
+        const xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
         xhr.timeout = 3000;
-        xhr.open("post", '/servererr', true);
+        xhr.open("post", '/v1/ap1/postArticle', true);
         xhr.setRequestHeader("content-type", "application/json;charset=utf-8");
         xhr.setRequestHeader("Accept", "application/json");
         xhr.send({a: 1, b: 2});
     })
 
-    document.querySelector('#btn6').addEventListener('click', function () {
-        fetch('/axxx', {
+    btn6.addEventListener('click', function () {
+        fetch('/v1/api/xxxxxxxx', {
             body: "aa"
         })
     })
-    document.querySelector('#btn7').addEventListener('click', function () {
-        console.log(logReporting.snapshot, '======');
-        // const replayer = new rrweb.Replayer(logReporting.snapshot);
+    btn7.addEventListener('click', function () {
+
+
+        // 18.17
+        console.log(logReporting.snapshot)
+
+
+        // const compressed = LZString.decompress(logReporting.snapshot);
+        // console.log(compressed)
+
+        // console.log(logReporting.snapshot, '======');
+        // const replayer = new rrweb.Replayer(logReporting.snapshot, {
+        //     unpackFn: rrweb.unpack,
+        // });
         // replayer.play();
     })
-
-
 
 </script>
 </body>
