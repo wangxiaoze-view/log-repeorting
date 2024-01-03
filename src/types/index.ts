@@ -10,12 +10,14 @@ export type LogConfig = {
     // 监听请求报错
     watchAxios: boolean;
 };
-
+export type LogMethodType = 'sendBeacon' | 'fetch'
 export type LogOptions = {
     // 上报地址
     dsn: string;
     // 是否开启调试模式
     debug: boolean;
+    // 上报的方式
+    logMethod: LogMethodType,
     // 配置项
     config: LogConfig;
 };

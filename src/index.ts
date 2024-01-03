@@ -1,4 +1,4 @@
-import {LogConfig, LogOptions} from './types';
+import {LogConfig, LogMethodType, LogOptions} from './types';
 import {watchJsError, watchReadyError, removeJsError} from './lib/watchJsError';
 import {cancelRequest, watchAxios} from './lib/watchAxios';
 import {Logger} from "./logger";
@@ -12,6 +12,8 @@ class LogReporting extends Logger {
     public stopFn: any = null
     // dsn
     public dsn: string = ''
+    // 上报地址
+    public logMethod: LogMethodType = 'fetch';
     // 全局配置信息
     public config: LogConfig | Record<string, any> = {};
     // 全部参数, 适用于重新执行
@@ -44,7 +46,7 @@ class LogReporting extends Logger {
     validateConfig(options: LogOptions) {
         return new Promise<boolean>((resolve, reject) => {
             const keys = Object.keys(options);
-            const {dsn, debug, config} = options
+            const {dsn, debug, config, logMethod} = options
             // 没有传入对应的参数报错提示
             if (!options || !keys.length) {
                 return reject({
@@ -56,7 +58,10 @@ class LogReporting extends Logger {
                     message: 'dsn不能为空!',
                 });
             }
+            // 上报地址
             this.dsn = dsn || ''
+            // 上报的方式, 默认fetch
+            this.logMethod = logMethod || 'fetch'
             // 如果没有设置，默认为debug模式，debug将会打印所有报错的信息
             // debug 默认开启
             this.debug = debug || true

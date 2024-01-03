@@ -23,5 +23,15 @@ export function sendReport(errorData: Record<string, any>) {
     ...errorData,
   };
 
-  navigator.sendBeacon(logReporting.dsn, JSON.stringify(params));
+  if (logReporting.logMethod === 'fetch') {
+    fetch(logReporting.dsn, {
+      method: 'POST',
+      body: JSON.stringify(params)
+    }).then()
+  } else if (logReporting.logMethod === 'sendBeacon') {
+    navigator.sendBeacon(logReporting.dsn, JSON.stringify(params));
+    // navigator.sendBeacon(logReporting.dsn,  new Blob([JSON.stringify(params)], {
+    //   type: 'text/plain' // 不指定 type 或者指定为空字符串也是不行的
+    // }));
+  }
 }

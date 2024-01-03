@@ -8,12 +8,11 @@ export function watchRecord() {
             isCheckout && (logReporting.snapshot = [])
             logReporting.snapshot.push(event);
         },
-        checkoutEveryNms: 15 * 1000, // 每15s重新制作快照
-        checkoutEveryNth: 200, // 每 200 个 event 重新制作快照
-        // packFn: rrweb.pack,
+        checkoutEveryNms: 20 * 1000, // 每15s重新制作快照
+        // checkoutEveryNth: 200, // 每 200 个 event 重新制作快照
         sampling: {
             // 不录制鼠标移动事件
-            mousemove: false,
+            mousemove: true,
             // 设置滚动事件的触发频率
             scroll: 150, // 每 150ms 最多触发一次
             // set the interval of media interaction event

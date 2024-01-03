@@ -36,7 +36,8 @@
 
     logReporting.init({
         // 上报地址
-        dsn: location.href,
+        // dsn: location.href,
+        dsn: 'http://localhost:8888/postLog',
         // 是否开启调试
         debug: false,
         config: {
@@ -107,21 +108,13 @@
             body: "aa"
         })
     })
-    btn7.addEventListener('click', function () {
-
-
-        // 18.17
-        console.log(logReporting.snapshot)
-
-
-        // const compressed = LZString.decompress(logReporting.snapshot);
-        // console.log(compressed)
-
-        // console.log(logReporting.snapshot, '======');
-        // const replayer = new rrweb.Replayer(logReporting.snapshot, {
-        //     unpackFn: rrweb.unpack,
-        // });
-        // replayer.play();
+    btn7.addEventListener('click', async function () {
+        const result = await fetch('http://localhost:8888/getLogData')
+        const data = await result.json()
+        if (!data.data) return
+        const videoData = LZString.decompress(data.data.snapshot);
+        const player = new rrweb.Replayer(JSON.parse(videoData));
+        player.play();
     })
 
 </script>
