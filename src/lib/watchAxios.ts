@@ -18,7 +18,7 @@ function initWatchAxios() {
     return ajaxOpen.call(this, method, url, true);
   };
 
-  // 劫持 send方法
+  // 拦截 send方法
   XMLHttpRequest.prototype.send = function (body) {
     this.addEventListener('readystatechange', e => {
       const { readyState, status, responseText, statusText } = this;

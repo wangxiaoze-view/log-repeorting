@@ -3,12 +3,6 @@ import { getNavigator } from './navigator';
 import dayjs from 'dayjs';
 
 function getCommonError() {
-  // 获取5s之前的快照
-  // const time = dayjs().subtract(5, 'second').format('YYYY-MM-DD HH:mm:ss');
-  // const snapshot = logReporting.snapshot.filter(i => {
-  //   return i.timestamp >= new Date(time).getTime();
-  // });
-
   return {
     title: document.title,
     url: location.href,
@@ -26,5 +20,5 @@ export function sendReport(errorData: Record<string, any>) {
     ...errorData,
   };
 
-  navigator.sendBeacon(logReporting.getConfigValue('sdn'), JSON.stringify(params));
+  navigator.sendBeacon(logReporting.dsn, JSON.stringify(params));
 }

@@ -3,21 +3,27 @@ import { sendReport } from '../shared/send';
 import logReporting from '../index';
 import { eachLoadResource } from './renderLinks';
 
-// promise, 请求等
+/**
+ * @description 特殊拦截, 拦截promise异常
+ * @param error
+ */
 function unhandledrejection(error: PromiseRejectionEvent) {
   const sendError = promiseError(error);
   sendReport(sendError);
   logReporting.console('error', 'Promise相关错误!', sendError);
 }
 
-// js, 资源拦截
+/**
+ * @description js,资源拦截：js拦截错误信息, 资源拦截状态
+ * @param error
+ */
 function eventError(error: ErrorEvent | Event) {
   if (error.cancelable) {
     const sendError = getJsError(<ErrorEvent>error);
     sendReport(sendError);
     logReporting.console('error', 'JS逻辑错误, 请检查逻辑是否正确!', sendError);
   } else {
-    if (!logReporting.watchSource) return;
+    if (!logReporting.config.watchSource) return;
     const sendError = getSourceError(<ErrorEvent>error);
     sendReport(sendError);
     logReporting.console('error', '资源加载失败, 请检查资源地址是否引入正确!', sendError);
