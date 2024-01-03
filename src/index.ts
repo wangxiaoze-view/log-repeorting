@@ -25,6 +25,7 @@ class LogReporting extends Logger {
         try {
             this.validateConfig(options).then(initSuccess => {
                 if (!initSuccess) return
+                this.console('info', '欢迎使用【log-reporting】日志上报系统!');
                 // 是否开启录制
                 this.config.isRecord && watchRecord();
                 // 页面准备好就开始监听
