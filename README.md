@@ -62,6 +62,38 @@
 </script>
 ```
 
+在`vue`中使用,
+`pnpm install log-reporting` 安装依赖
+
+在`main.js`中引入
+```js
+import {logReporting} from 'log-reporting'
+logReporting.init({
+    // 上报地址
+    dsn: 'http://localhost:8888/postLog',
+    // 是否开启调试, 控制台会打印出日志信息
+    debug: true,
+    // 上报方式：fetch sendBeacon
+    logMethod: 'fetch',
+    // 配置参数
+    config: {
+        // 是否开启录制, 可以录制报错前20s的视频
+        isRecord: true,
+        // 录制的时间(20s), 最大不能超过1分钟
+        recordTime: 20 * 1000,
+        // 页面准备好，是否就立即监听
+        watchReady: true,
+        // 监听js
+        watchJsError: true,
+        // 监听资源报错
+        watchSource: true,
+        // 监听请求报错
+        watchAxios: true,
+    }
+})
+```
+
+
 根据自己的业务需要开启对应的配置信息;
 
 ---
