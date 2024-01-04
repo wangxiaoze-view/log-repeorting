@@ -21,7 +21,7 @@ export default [
       dir: 'dist',
       format: 'esm',
       name: 'logReporting',
-      entryFileNames: '[name].esm.js',
+      entryFileNames: '[name].mjs.js',
     },
     plugins: [resolve(), commonjs(), typescript(), json(), uglify()],
   },
