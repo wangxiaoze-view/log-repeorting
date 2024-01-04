@@ -1,18 +1,31 @@
 {
   "name": "log-reporting",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "description": "前端日志上报SDK",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
+  "sideEffects": false,
   "scripts": {
     "dev": "rollup -w -c",
-    "build": "rollup -c",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "log",
+    "log-repeorting",
+    "rollup",
+    "rrweb",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangxiaoze-view/log-repeorting"
+  },
+  "author": "wangxiaoze@petalmail.com",
+  "bugs": {
+    "url": "https://github.com/wangxiaoze-view/log-repeorting/issues"
+  },
+  "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-json": "^6.0.1",
@@ -29,5 +42,16 @@
     "lz-string": "^1.5.0",
     "rrweb": "2.0.0-alpha.4",
     "tslib": "^2.6.2"
-  }
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "*.d.ts"
+  ]
 }

@@ -1,6 +1,8 @@
 export type LogConfig = {
     // 是否使用rrWeb
     isRecord: boolean,
+    // 录制时间
+    recordTime: number,
     // 页面准备好，是否就开始监听
     watchReady: boolean
     // 监听js报错
@@ -21,8 +23,6 @@ export type LogOptions = {
     // 配置项
     config: LogConfig;
 };
-
-
 export type ErrorDataType = 'Error'
 export type ErrorDataErrorType = 'Resource Error' | 'JS Error' | 'Promise Error' | 'Axios Error'
 // 统一错误信息
@@ -42,5 +42,4 @@ export type ErrorData = {
     lineno?: number;
     [k: string]: any
 };
-
 export type LoggerType = 'log' | 'warn' | 'error' | 'info'

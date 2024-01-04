@@ -2,13 +2,16 @@ import logReporting from '../index';
 import * as rrweb from "rrweb";
 
 export function watchRecord() {
+    // 设置最大录制时间为1分钟
+    const maxTime = 60 * 1000;
+    const recordTime = logReporting.config.recordTime || maxTime
     logReporting.stopFn = rrweb.record({
         emit(event, isCheckout) {
             // isCheckout 是一个标识，告诉你重新制作了快照
             isCheckout && (logReporting.snapshot = [])
             logReporting.snapshot.push(event);
         },
-        checkoutEveryNms: 20 * 1000, // 每15s重新制作快照
+        checkoutEveryNms: recordTime >= maxTime ? maxTime : recordTime, // 每xxs重新制作快照
         // checkoutEveryNth: 200, // 每 200 个 event 重新制作快照
         sampling: {
             // 不录制鼠标移动事件

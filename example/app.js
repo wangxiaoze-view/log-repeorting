@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
 app.use(rawBodyParser());
 
 let data = null
+// 模拟上报错误日子
 app.post('/postLog', (req, res) => {
     // 使用于navigator.sendBeacon上传
     const bodyString = req.rawBody.toString('utf8')
@@ -22,6 +23,7 @@ app.post('/postLog', (req, res) => {
     res.send('success')
 })
 
+// 获取日志
 app.get('/getLogData', (req, res) => {
     res.send({
         data: data || null

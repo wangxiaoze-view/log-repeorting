@@ -11,9 +11,6 @@ enum LoggerTypeConfig {
 export class Logger {
     public debug: boolean | undefined;
 
-    constructor() {
-    }
-
     time(time?: Date, format = 'YYYY-MM-DD HH:mm:ss') {
         return dayjs(time).format(format);
     }
