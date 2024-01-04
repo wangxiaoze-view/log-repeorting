@@ -10,7 +10,7 @@
     <img src="https://img.shields.io/badge/tslib-2.6.2-brightgreen.svg" alt="vue">
   </a>
 </p>
-<h1>log-reporting （version: v2.0.0）</h1>
+<h1>log-reporting （日志上报）</h1>
 </div>
 
 ## 🔈 注意事项
