@@ -1,6 +1,6 @@
 {
   "name": "log-reporting",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": false,
   "description": "前端日志上报SDK",
   "main": "dist/index.cjs.js",
