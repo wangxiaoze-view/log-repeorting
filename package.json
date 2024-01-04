@@ -47,7 +47,7 @@
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
+      "require": "./dist/index.esm",
       "types": "./index.d.ts"
     }
   },
