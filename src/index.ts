@@ -97,3 +97,4 @@ class LogReporting extends Logger {
 const logReporting = new LogReporting();
 (window as any).logReporting = logReporting;
 export default logReporting;
+export {logReporting}
