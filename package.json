@@ -20,7 +20,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wangxiaoze-view/log-repeorting"
+    "url": "git+https://github.com/wangxiaoze-view/log-repeorting.git"
   },
   "author": "wangxiaoze@petalmail.com",
   "bugs": {
