@@ -1,0 +1,38 @@
+{
+  "name": "@log-reporting/types",
+  "version": "1.0.0",
+  "description": "前端日志上报SDK",
+  "homepage": "https://github.com/wangxiaoze-view/log-repeorting#readme",
+  "main": "./dist/index.ts",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts"
+    },
+    "./*": "./*"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangxiaoze-view/log-repeorting.git",
+    "directory": "packages/types"
+  },
+  "author": "王小泽 <wangze@anbangke.com>",
+  "keywords": [
+    "log",
+    "log-repeorting",
+    "rollup",
+    "rrweb",
+    "typescript",
+    "埋点",
+    "日志",
+    "采集"
+  ],
+  "publishConfig": {
+    "registry": "https://mirrors.cloud.tencent.com/npm/"
+  },
+  "bugs": {
+    "url": "https://github.com/wangxiaoze-view/log-repeorting/issues"
+  }
+}

@@ -2,6 +2,7 @@ import { EVENT_TYPES } from '../enum';
 import { isKeyValid, on } from '../utils';
 import { _global } from '../share/global';
 import { eventBus } from './eventBus';
+import getErrorEle from './getErrorEle';
 
 // 重写各类拦截错误的方法
 export function initReWrite(): void {
@@ -24,8 +25,8 @@ function reWriteFun(type: string) {
     case EVENT_TYPES.CONSOLE_ERROR:
       listenConsole(k);
       break;
-    case EVENT_TYPES.EVENT:
-      listenEvent(k);
+    case EVENT_TYPES.CLICK:
+      // listenClick(k);
       break;
     case EVENT_TYPES.LOAD:
       listenLoad(k);
@@ -44,6 +45,8 @@ function listenError(type: EVENT_TYPES) {
     _global,
     type,
     (e: ErrorEvent) => {
+      const error = getErrorEle();
+      console.log(error);
       eventBus.emit(type, e);
     },
     true,
@@ -59,37 +62,24 @@ function listenConsole(type: EVENT_TYPES) {
   };
 }
 
+// 页面加载
 function listenLoad(type: EVENT_TYPES) {
   on(_global, type, e => {
     eventBus.emit(type, e);
   });
 }
 
-function listenEvent(type: EVENT_TYPES) {
-  // TODO: 监听事件
-  console.log(type);
-  // ["click", "touchstart", "mousedown", "keydown", "mouseover"].forEach(
-  // 	eventType => {
-  // 		document.addEventListener(
-  // 			eventType,
-  // 			event => {
-  // 				console.log(event);
-  // 			},
-  // 			{
-  // 				// 是在捕获阶段还是冒泡阶段执行
-  // 				capture: true,
-  // 				// 默认不阻止默认事件
-  // 				passive: true,
-  // 			}
-  // 		);
-  // 	}
-  // );
-}
+//  TODO: 或许不需要
+// function listenClick(type: EVENT_TYPES) {
+//   // on(_global, type, e => {
+//   //   console.log(e, '-----------');
+//   //   eventBus.emit(type, e);
+//   // });
+// }
 
+// 页面离开加载
 function listenBeforeUnLoad(type: EVENT_TYPES) {
-  on(_global, type, () => {
-    eventBus.on(type, () => {
-      console.log(123123);
-    });
+  on(_global, type, e => {
+    eventBus.emit(type, e);
   });
 }

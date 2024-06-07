@@ -32,6 +32,7 @@
     "paths": {
       "@log-reporting/core": ["./packages/core/index.ts"],
       "@log-reporting/logger": ["./packages/logger/index.ts"],
+      "@log-reporting/types": ["./packages/types/index.ts"],
     },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */

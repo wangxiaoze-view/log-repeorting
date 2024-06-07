@@ -1,5 +1,5 @@
 import { logger } from '@log-reporting/logger';
-import { AnyFun, IBaseOptions } from '../types';
+import { AnyFun, IBaseOptions } from '@log-reporting/types';
 
 /**
  * 验证配置选项是否满足基础要求。
@@ -25,7 +25,7 @@ export function isKeyValid(key: string, obj: object) {
   // key in obj
   return Object.prototype.hasOwnProperty.call(obj, key);
 }
-// 事件
+// 事件绑定
 export function on(
   target: Window | Document | HTMLElement,
   event: string,
@@ -33,4 +33,32 @@ export function on(
   options = false,
 ) {
   target.addEventListener(event, callback, options);
+}
+
+export function getNavigation(entry: Record<string, any>) {
+  const {
+    domainLookupEnd,
+    domainLookupStart,
+    connectEnd,
+    connectStart,
+    secureConnectionStart,
+    responseStart,
+    requestStart,
+    domInteractive,
+    domComplete,
+    loadEventEnd,
+    loadEventStart,
+    fetchStart,
+  } = entry;
+
+  return {
+    dns: domainLookupEnd - domainLookupStart,
+    tcp: connectEnd - connectStart,
+    ssl: secureConnectionStart,
+    ttfb: responseStart - requestStart,
+    render: domInteractive ?? 0,
+    dom: domComplete ?? 0,
+    load: (loadEventEnd ?? 0) - (loadEventStart ?? 0),
+    total: (loadEventEnd ?? 0) - (fetchStart ?? 0),
+  };
 }

@@ -28,7 +28,11 @@ function pushLoad(type: EVENT_TYPES) {
     console.log('load', e);
   });
 
-  eventBus.on(EVENT_TYPES.ERROR, e => {
-    console.log('err', e);
+  // eventBus.on(EVENT_TYPES.ERROR, e => {
+  //   console.log('err', e);
+  // });
+
+  eventBus.on(EVENT_TYPES.CLICK, e => {
+    console.log('click', e);
   });
 }

@@ -1,5 +1,5 @@
-import { IBaseOptions } from '../types';
 import { _support } from './global';
+import { IBaseOptions } from '@log-reporting/types';
 
 export class BaseInfo {
   public options: IBaseOptions;

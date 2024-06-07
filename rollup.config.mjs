@@ -19,6 +19,11 @@ const packages = [
     desc: 'log-repeorting logger',
     out_name: 'logReportingLogger',
   },
+  {
+    name: 'types',
+    desc: 'log-repeorting types',
+    out_name: 'logReportingTypes',
+  },
 ];
 
 const sourcemap = false;
@@ -62,13 +67,18 @@ for (const pck of packages) {
     },
   ];
 
+  const exit =
+    pck.name !== 'types'
+      ? {
+          input: `${input}/index.ts`,
+          output: _output,
+          plugins,
+          external,
+        }
+      : null;
+
   const _configs = [
-    {
-      input: `${input}/index.ts`,
-      output: _output,
-      plugins,
-      external,
-    },
+    exit,
     {
       input: `${input}/index.ts`,
       output: {
@@ -79,7 +89,7 @@ for (const pck of packages) {
       plugins: [dts()],
       external,
     },
-  ];
+  ].filter(i => i);
 
   configs.push(..._configs);
 }

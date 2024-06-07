@@ -1,4 +1,5 @@
 const { log: _log } = console;
+import { LogFun, LoggerType } from '@log-reporting/types';
 import pck from './package.json';
 
 export class Logger {
@@ -44,13 +45,13 @@ export class Logger {
   }
 }
 
-const logger = new Logger();
+const logger: LoggerType = new Logger();
 
-const log = logger.log;
-const info = logger.info;
-const warn = logger.warn;
-const error = logger.error;
-const success = logger.success;
+const log: LogFun = logger.log;
+const info: LogFun = logger.info;
+const warn: LogFun = logger.warn;
+const error: LogFun = logger.error;
+const success: LogFun = logger.success;
 const _name = pck.name;
 const _version = pck.version;
 const _author = pck.author;

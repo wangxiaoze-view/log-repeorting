@@ -1,4 +1,4 @@
-import { IWindow, LogReportingType } from '../types';
+import { IWindow, LogReportingType } from '@log-reporting/types';
 
 // 获取window global 对象
 export function getGlobalThis(): IWindow {

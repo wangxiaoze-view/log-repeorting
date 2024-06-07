@@ -1,8 +1,8 @@
 //  事件总线，订阅发布
 
 import { EVENT_TYPES } from '../enum';
-import { AnyFun } from '../types';
 import { _support } from '../share/global';
+import { AnyFun } from '@log-reporting/types';
 
 export class EventBus {
   static _instance: EventBus;

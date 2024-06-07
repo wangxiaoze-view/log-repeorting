@@ -10,13 +10,22 @@
 <body>
 
 
-  <!-- <script src="../packages/core/dist/index.umd.js"></script>
-  <script src="../packages/logger/dist/index.umd.js"></script> -->
-  <script src="../packages/logger/dist/index.iife.min.js"></script>
+  <button id="btn1">点击按钮报错</button>
+
+
+  <script src="../packages/core/dist/index.umd.js"></script>
+  <script src="../packages/logger/dist/index.umd.js"></script>
 
 
   <script>
+    logReportingCore.init({
+      dsn: 'http://localhost:8888/postLog'
+    })
     // console.log(LogReporting, 123)
+
+    document.querySelector('#btn1').addEventListener('click', function () {
+      isWatchError
+    })
 
   </script>
 
