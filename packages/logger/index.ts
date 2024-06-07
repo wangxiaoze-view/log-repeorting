@@ -1,11 +1,10 @@
-console.log('logger');
-
-const { log } = console;
+const { log: _log } = console;
+import pck from './package.json';
 
 export class Logger {
   constructor() {}
   log(title: string, content: string) {
-    log(
+    _log(
       `%c${title}%c ${content}`,
       'color: #fff;font-weight: blod;letter-spacing:2px;padding: 3px 5px;background-color: #73767a;border-radius: 3px;',
       'color: #909399;font-weight: blod;letter-spacing:2px;padding: 3px 5px;',
@@ -13,7 +12,7 @@ export class Logger {
   }
 
   info(title: string, content: string) {
-    log(
+    _log(
       `%c${title}%c ${content}`,
       'color: #fff;font-weight: blod;letter-spacing:2px;padding: 3px 5px;background-color: #337ecc;border-radius: 3px;',
       'color: #409EFF;font-weight: blod;letter-spacing:2px;padding: 3px 5px;',
@@ -21,7 +20,7 @@ export class Logger {
   }
 
   warn(title: string, content: string) {
-    log(
+    _log(
       `%c${title}%c ${content}`,
       'color: #fff;font-weight: blod;letter-spacing:2px;padding: 3px 5px;background-color: #b88230;border-radius: 3px;',
       'color: #E6A23C;font-weight: blod;letter-spacing:2px;padding: 3px 5px;',
@@ -29,7 +28,7 @@ export class Logger {
   }
 
   error(title: string, content: string) {
-    log(
+    _log(
       `%c${title}%c ${content}`,
       'color: #fff;font-weight: blod;letter-spacing:2px;padding: 3px 5px;background-color: #c45656;border-radius: 3px;',
       'color: #F56C6C;font-weight: blod;letter-spacing:2px;padding: 3px 5px;',
@@ -37,7 +36,7 @@ export class Logger {
   }
 
   success(title: string, content: string) {
-    log(
+    _log(
       `%c${title}%c ${content}`,
       'color: #fff;font-weight: blod;letter-spacing:2px;padding: 3px 5px;background-color: #529b2e;border-radius: 3px;',
       'color: #67C23A;font-weight: blod;letter-spacing:2px;padding: 3px 5px;',
@@ -45,4 +44,16 @@ export class Logger {
   }
 }
 
-export const logger = new Logger();
+const logger = new Logger();
+
+const log = logger.log;
+const info = logger.info;
+const warn = logger.warn;
+const error = logger.error;
+const success = logger.success;
+const _name = pck.name;
+const _version = pck.version;
+const _author = pck.author;
+const _description = pck.description;
+
+export { logger, log, info, warn, error, success, _name, _version, _author, _description };

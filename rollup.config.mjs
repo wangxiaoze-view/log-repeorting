@@ -12,10 +12,12 @@ const packages = [
   {
     name: 'core',
     desc: 'log-repeorting核心代码',
+    out_name: 'logReportingCore',
   },
   {
     name: 'logger',
     desc: 'log-repeorting logger',
+    out_name: 'logReportingLogger',
   },
 ];
 
@@ -46,9 +48,16 @@ for (const pck of packages) {
       sourcemap,
     },
     {
+      file: `${input}/dist/index.umd.js`,
+      format: 'umd',
+      name: pck.out_name,
+      sourcemap,
+    },
+    {
       file: `${input}/dist/index.iife.min.js`,
       format: 'iife',
       sourcemap,
+      name: pck.out_name,
       plugins: [],
     },
   ];
