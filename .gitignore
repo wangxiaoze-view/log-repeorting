@@ -20,7 +20,6 @@ package-lock.json
 
 # Editor directories and files
 .idea
-.vscode
 *.suo
 *.ntvs*
 *.njsproj
@@ -28,3 +27,4 @@ package-lock.json
 *.sw?
 
 example/node_modules
+packages/dist

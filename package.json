@@ -5,7 +5,13 @@
   "description": "前端日志上报SDK, 目前对该版本进行大版本更新...",
   "scripts": {
     "dev": "rollup -w -c",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "lint-eslint": "eslint \"packages/**/*.{ts,js.json}\" --max-warnings=0 --fix",
+    "lint": "npx oxlint && npm run lint-eslint",
+    "format": "prettier  \"packages/**/*.{ts,js.json}\"  --write",
+    "prepare": "husky install",
+    "commit": "npx cz",
+    "release": "npm run build && npm publish"
   },
   "keywords": [
     "log",
@@ -24,14 +30,24 @@
     "@rollup/plugin-json": "^6.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.5",
-    "eslint": "^8.52.0",
+    "@typescript-eslint/eslint-plugin": "^7.12.0",
+    "@typescript-eslint/parser": "^7.12.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-oxlint": "^0.4.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "husky": "^9.0.11",
     "lerna": "^8.1.3",
+    "lint-staged": "^13.0.3",
+    "oxlint": "^0.4.2",
     "prettier": "^3.0.3",
     "rollup": "^4.18.0",
+    "rollup-plugin-dts": "^5.3.0",
+    "rollup-plugin-esbuild": "^5.0.0",
     "rollup-plugin-uglify": "^6.0.4",
     "typescript": "^5.2.2",
-    "rollup-plugin-dts": "^5.3.0",
-    "rollup-plugin-esbuild": "^5.0.0"
+    "typescript-eslint": "^7.6.0"
   },
   "dependencies": {
     "dayjs": "^1.11.10",
@@ -41,5 +57,13 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  }
 }
