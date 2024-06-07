@@ -27,4 +27,4 @@ package-lock.json
 *.sw?
 
 example/node_modules
-packages/dist
+packages/*/dist

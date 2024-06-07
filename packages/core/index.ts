@@ -1,1 +1,3 @@
-console.log('入口文件');
+import { logger } from '@log-reporting/logger';
+
+logger.log('参数', '12312312');
