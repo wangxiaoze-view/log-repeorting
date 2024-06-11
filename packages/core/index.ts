@@ -31,10 +31,11 @@ const initBaseData: IBaseOptions = {
   dsn: '',
   isDebug: false,
   isError: true,
+  isConsoleError: false,
   isPerformance: true,
   isResource: false,
   isXhr: true,
-  isHistory: false,
+  // isHistory: false,
 };
 
 const _name = pck.name;

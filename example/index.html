@@ -1,57 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        button {
-            padding: 6px 10px;
-            cursor: pointer;
-            outline: none;
-            border: 1px solid cadetblue;
-            background: cadetblue;
-            border-radius: 4px;
-            color: #fff;
-        }
-    </style>
-    <!--    <link rel="stylesheet" href="http://xxx.aa.com/123.css">-->
-    <!--    <link rel="stylesheet" href="http://xxx.aa.com/222.css">-->
-    <link rel="stylesheet" href="./rrweb.min.css">
-    <script src="./rrweb.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    button {
+      padding: 6px 10px;
+      cursor: pointer;
+      outline: none;
+      border: 1px solid cadetblue;
+      background: cadetblue;
+      border-radius: 4px;
+      color: #fff;
+    }
+  </style>
+  <!--    <link rel="stylesheet" href="http://xxx.aa.com/123.css">-->
+  <!--    <link rel="stylesheet" href="http://xxx.aa.com/222.css">-->
+  <link rel="stylesheet" href="./rrweb.min.css">
+  <script src="./rrweb.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
 </head>
+
 <body>
 
 
-<button id="btn1">资源</button>
-<button id="btn2">js报错</button>
-<button id="btn3">promise</button>
-<button id="btn4">axios</button>
-<button id="btn5">axios-post</button>
-<button id="btn6">fetch</button>
-<button id="btn7">播放</button>
+  <button id="btn1">资源</button>
+  <button id="btn2">js报错</button>
+  <button id="btn3">promise</button>
+  <button id="btn4">axios</button>
+  <button id="btn5">axios-post</button>
+  <button id="btn6">fetch</button>
+  <button id="btn7">console.error</button>
+  <button id="btn8">播放</button>
 
-<script type="module">
-    import logReporting from '../dist/index.mjs.js'
+  <script type="module">
+    import { init } from '../packages/core/dist/index.mjs'
 
-    logReporting.init({
-        // 上报地址
-        // dsn: location.href,
-        dsn: 'http://localhost:8888/postLog',
-        // 是否开启调试
-        debug: false,
-        config: {
-            // 是否开启录制
-            isRecord: true,
-            // 页面准备好，是否就立即监听
-            watchReady: true,
-            // 监听js
-            watchJsError: true,
-            // 监听资源报错
-            watchSource: true,
-            // 监听请求报错
-            watchAxios: true,
-        }
+    init({
+      // 上报地址
+      dsn: 'http://localhost:8888/postLog',
+      // 是否开启调试
+      isDebug: true,
+      // 是否捕获错误
+      isError: true,
+      // 是否捕获console.error
+      isConsoleError: true,
+      // 是否捕获性能
+      isPerformance: true,
+      // 是否捕获资源
+      isResource: true,
+      // 是否捕获请求
+      isXhr: true
     })
 
     const btn1 = document.querySelector('#btn1')
@@ -61,62 +61,68 @@
     const btn5 = document.querySelector('#btn5')
     const btn6 = document.querySelector('#btn6')
     const btn7 = document.querySelector('#btn7')
+    const btn8 = document.querySelector('#btn8')
 
     btn1.addEventListener('click', function () {
-        let link = document.createElement('link')
-        link.href = 'https://xxx.xxxxxx.com/123.css'
-        link.rel = "stylesheet"
-        document.head.append(link)
+      let link = document.createElement('link')
+      link.href = 'https://xxx.xxxxxx.com/123.css'
+      link.rel = "stylesheet"
+      document.head.append(link)
     })
     btn2.addEventListener('click', function () {
-        isWatchError
+      isWatchError
     })
 
     btn3.addEventListener('click', function () {
-        new Promise((resolve, reject) => {
-            try {
-                isWatchError
-            } catch (e) {
-                reject(e)
-            }
-        })
+      new Promise((resolve, reject) => {
+        try {
+          isWatchError
+        } catch (e) {
+          reject(e)
+        }
+      })
     })
 
     btn4.addEventListener('click', function () {
-        const xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
-        xhr.timeout = 3000;
-        xhr.open("get", '/v1/api/getUserInfo?p=1&t=2', true);
-        xhr.setRequestHeader("content-type", "application/json;charset=utf-8");
-        xhr.setRequestHeader("Accept", "application/json");
-        xhr.send();
+      const xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
+      xhr.timeout = 3000;
+      xhr.open("get", '/v1/api/getUserInfo?p=1&t=2', true);
+      xhr.setRequestHeader("content-type", "application/json;charset=utf-8");
+      xhr.setRequestHeader("Accept", "application/json");
+      xhr.send();
     })
 
 
     btn5.addEventListener('click', function () {
-        const xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
-        xhr.timeout = 3000;
-        xhr.open("post", '/v1/ap1/postArticle', true);
-        xhr.setRequestHeader("content-type", "application/json;charset=utf-8");
-        xhr.setRequestHeader("Accept", "application/json");
-        xhr.send({a: 1, b: 2});
+      const xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
+      xhr.timeout = 3000;
+      xhr.open("post", '/v1/ap1/postArticle', true);
+      xhr.setRequestHeader("content-type", "application/json;charset=utf-8");
+      xhr.setRequestHeader("Accept", "application/json");
+      xhr.send({ a: 1, b: 2 });
     })
 
     btn6.addEventListener('click', function () {
-        fetch('/v1/api/xxxxxxxx', {
-            body: "aa"
-        })
+      fetch('/v1/api/xxxxxxxx', {
+        body: "aa"
+      })
     })
-    btn7.addEventListener('click', async function () {
-        const result = await fetch('http://localhost:8888/getLogData')
-        const data = await result.json()
-        if (!data.data) return
-        const videoData = LZString.decompress(data.data.snapshot);
-        const player = new rrweb.Replayer(JSON.parse(videoData));
-        player.play();
+    btn7.addEventListener('click', function () {
+      console.error(a)
     })
 
-</script>
+    btn8.addEventListener('click', async function () {
+      const result = await fetch('http://localhost:8888/getLogData')
+      const data = await result.json()
+      if (!data.data) return
+      const videoData = LZString.decompress(data.data.snapshot);
+      const player = new rrweb.Replayer(JSON.parse(videoData));
+      player.play();
+    })
+
+  </script>
 </body>
+
 </html>

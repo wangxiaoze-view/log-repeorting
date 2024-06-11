@@ -62,3 +62,12 @@ export function getNavigation(entry: Record<string, any>) {
     total: (loadEventEnd ?? 0) - (fetchStart ?? 0),
   };
 }
+
+export function getParams(search: string) {
+  const searchParams = new URLSearchParams(search);
+  const queryParamsObject: { [key: string]: string } = {};
+  for (const [key, value] of searchParams.entries()) {
+    queryParamsObject[key] = value;
+  }
+  return queryParamsObject;
+}

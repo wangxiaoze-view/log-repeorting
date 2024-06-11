@@ -6,13 +6,21 @@ export enum EVENT_TYPES {
   UNHANDLEDREJECTION = 'unhandledrejection',
   // console.error
   CONSOLE_ERROR = 'consoleError',
-  // event
-  CLICK = 'click',
-  // loading
-  LOAD = 'load',
-  BEFORE_UN_LOAD = 'beforeunload',
   // xhr
   XHR = 'xhr',
   // fetch
   FETCH = 'fetch',
+}
+
+export enum ERROR_TYPES {
+  // js
+  JS = 'js_error',
+  // promise
+  PROMISE = 'promise_error',
+  // console.error
+  CONSOLE_ERROR = 'console_error',
+  // xhr
+  XHR = 'xhr_error',
+  // fetch
+  FETCH = 'fetch_error',
 }
