@@ -3,6 +3,7 @@ import { EVENT_TYPES } from '../enum';
 import { _global, _support } from '../share/global';
 import { isKeyValid } from '../utils';
 import { eventBus } from './eventBus';
+import { sendReport } from './send';
 
 export function initPushError() {
   for (const key in EVENT_TYPES) {
@@ -42,6 +43,7 @@ function pushError(type: EVENT_TYPES) {
     if (_support.baseInfo.options.isDebug) {
       logger.error('js逻辑错误：', JSON.stringify(errorOptions));
     }
+    sendReport(errorOptions);
   });
 }
 
@@ -50,6 +52,7 @@ function pushConsole(type: EVENT_TYPES) {
     if (_support.baseInfo.options.isDebug) {
       logger.info('console错误：', JSON.stringify(errorOptions));
     }
+    sendReport(errorOptions);
   });
 }
 
@@ -58,6 +61,7 @@ function pushUnhandledrejection(type: EVENT_TYPES) {
     if (_support.baseInfo.options.isDebug) {
       logger.error('Promise错误：', JSON.stringify(errorOptions));
     }
+    sendReport(errorOptions);
   });
 }
 
@@ -67,6 +71,7 @@ function pushXhr(type: EVENT_TYPES) {
     if (_support.baseInfo.options.isDebug) {
       logger.error('xhr接口错误：', JSON.stringify(errorOptions));
     }
+    sendReport(errorOptions);
   });
 }
 
@@ -76,5 +81,6 @@ function pushFetch(type: EVENT_TYPES) {
     if (_support.baseInfo.options.isDebug) {
       logger.error('fetch接口错误：', JSON.stringify(errorOptions));
     }
+    sendReport(errorOptions);
   });
 }

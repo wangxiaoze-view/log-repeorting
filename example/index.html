@@ -51,7 +51,11 @@
       // 是否捕获资源
       isResource: true,
       // 是否捕获请求
-      isXhr: true
+      isXhr: true,
+      record: {
+        open: true,
+        time: 10 * 1000
+      }
     })
 
     const btn1 = document.querySelector('#btn1')

@@ -2,7 +2,9 @@ import { _support } from './global';
 import { IBaseOptions } from '@log-reporting/types';
 
 export class BaseInfo {
+  // 基础配置信息
   public options: IBaseOptions;
+
   constructor(options: IBaseOptions) {
     this.options = options;
   }

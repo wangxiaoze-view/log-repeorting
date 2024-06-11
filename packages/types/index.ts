@@ -3,6 +3,8 @@ import { EventBus } from '@log-reporting/core/lib/eventBus';
 import { Logger } from '@log-reporting/logger';
 import { Reource } from '@log-reporting/core/share/reource';
 import { PerformanceClass } from '@log-reporting/core/share/performance';
+import { RecordScreen } from '@log-reporting/core/lib/record';
+
 export interface IBaseOptions {
   // dsn
   dsn: string;
@@ -20,6 +22,13 @@ export interface IBaseOptions {
   isXhr: boolean;
   // 是否捕获路由
   // isHistory: boolean;
+  // 屏幕录制
+  record: {
+    // 是否开启
+    open: boolean;
+    // 录制时间
+    time: number;
+  };
 }
 
 export type LogReportingType = {
@@ -27,6 +36,7 @@ export type LogReportingType = {
   eventBus: EventBus;
   reource: Reource;
   performance: PerformanceClass;
+  record: RecordScreen;
 };
 
 export interface IWindow extends Window {
@@ -108,4 +118,9 @@ export interface IConsoleErrorType {
   lineno: number;
   stackMessage: string;
   fileName: string;
+}
+
+export interface RecordEventScope {
+  time: string;
+  eventList: any[];
 }

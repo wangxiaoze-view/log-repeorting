@@ -6,6 +6,7 @@ import { initReWrite } from './lib/rewrite';
 import pck from './package.json';
 import { IBaseOptions } from '@log-reporting/types';
 import { initPerformance } from './lib/initPerformance';
+import { initRecord } from './lib/record';
 class Main {
   constructor() {}
 
@@ -22,6 +23,8 @@ class Main {
     initReWrite();
     // 触发
     initPushError();
+    // 视频录制
+    initRecord();
     // 初始化完成标识
     _global.__log_reporting_init__ = true;
   }
@@ -35,6 +38,10 @@ const initBaseData: IBaseOptions = {
   isPerformance: true,
   isResource: false,
   isXhr: true,
+  record: {
+    open: true,
+    time: 10 * 1000,
+  },
   // isHistory: false,
 };
 
