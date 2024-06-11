@@ -13,6 +13,7 @@ function getCommonError() {
   };
 }
 
+// TODO: 这里的参数需要修改，是否支持手动上报/自定义？
 export function sendReport(errorData: Record<string, any>) {
   const common = getCommonError();
   const params = {
