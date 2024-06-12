@@ -11,16 +11,21 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
-app.use(rawBodyParser());
+// app.use(rawBodyParser());
 
 let data = null;
 // 模拟上报错误日子
 app.post('/postLog', (req, res) => {
-  // 使用于navigator.sendBeacon上传
-  const bodyString = req.rawBody.toString('utf8');
-  // console.log(JSON.parse(bodyString))
-  data = JSON.parse(bodyString);
-  res.send('success');
+  // beacon 提交打开注释
+  // const bodyString = req.rawBody.toString('utf8');
+  // data = JSON.parse(bodyString);
+
+  // xhr提交
+  data = req.body;
+  res.send({
+    success: true,
+    data,
+  });
 });
 
 // 获取日志

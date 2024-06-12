@@ -1,26 +1,93 @@
 import { _support } from '../share/global';
 import { getNavigator } from '../share/navigator';
 import lz from 'lz-string';
-function getCommonError() {
-  return {
-    title: document.title,
-    url: location.href,
-    date: Date.now(),
-    // snapshot: JSON.stringify(logReporting.snapshot),
-    // 这里使用 lz-string进行压缩, 但是在返回的数据哪里需要解压
-    snapshot: lz.compress(JSON.stringify(_support.record.snapshot)),
-    ...getNavigator(),
-  };
-}
-
+import { EVENT_TYPES } from '../enum';
+import { Base64 } from 'js-base64';
+import { logger } from '@log-reporting/logger';
 // TODO: 这里的参数需要修改，是否支持手动上报/自定义？
 // TODO: 支持pv统计以及曝光统计
-export function sendReport(errorData: Record<string, any>) {
-  const common = getCommonError();
+
+// 加密
+export function encryptFun(value: Record<string, any>, k?: string) {
+  const data = JSON.stringify(value);
+  const method = _support.baseInfo.options.encryptMethod;
+  if (method === 'lz') {
+    return lz.compress(data);
+  } else if (method === 'base64') {
+    return Base64.encode(data);
+  }
+  return k === 'snapshot' ? Base64.encode(data) : Base64.encode(data);
+}
+
+// 解密
+export function decryptionFun(value: string, k: string) {
+  const method = _support.baseInfo.options.encryptMethod;
+  if (method === 'lz') {
+    return lz.decompress(value);
+  } else if (method === 'base64') {
+    return Base64.decode(value);
+  }
+  return k === 'snapshot' ? Base64.decode(value) : Base64.decode(value);
+}
+
+function sendBeacon(url: string, params: string) {
+  return new Promise(resolve => {
+    navigator.sendBeacon(url, params);
+    resolve(true);
+  });
+}
+
+function sendXhr(url: string, params: any) {
+  return new Promise(resolve => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('post', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(params);
+    resolve(true);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        resolve(true);
+      }
+    };
+  });
+}
+
+export function sendReport(eventId: EVENT_TYPES, errorData: Record<string, any>) {
   const params = {
-    ...common,
-    ...errorData,
+    appId: _support.baseInfo.options.appId,
+    baseInfo: {
+      title: document.title,
+      url: location.href,
+      date: Date.now(),
+      ...getNavigator(),
+    },
+    reportInfo: {
+      eventId,
+      snapshot: encryptFun(_support.record.snapshot, 'snapshot'),
+      ...errorData,
+    },
   };
 
-  navigator.sendBeacon(_support.baseInfo.options.dsn, JSON.stringify(params));
+  const dsn = _support.baseInfo.options.dsn;
+  const method = _support.baseInfo.options!.method ?? 'beacon';
+
+  const stringParams = JSON.stringify(params);
+
+  return new Promise(resolve => {
+    switch (method) {
+      case 'beacon':
+        sendBeacon(dsn, stringParams).then(() => {
+          resolve({ type: 'xhr', success: true });
+        });
+        break;
+      case 'xhr':
+        sendXhr(dsn, stringParams).then(() => {
+          resolve({ type: 'xhr', success: true });
+        });
+        break;
+      default:
+        logger.warn('上报方式不支持:', "上报方式只支持 'beacon' 和 'xhr'");
+        break;
+    }
+  });
 }

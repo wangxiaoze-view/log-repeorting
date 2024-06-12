@@ -33,9 +33,14 @@
   <button id="btn6">fetch</button>
   <button id="btn7">console.error</button>
   <button id="btn8">播放</button>
+  <button id="btn9">Pv</button>
+
+  <div style="padding-top: 2000px;">
+    <button id="btn10">曝光</button>
+  </div>
 
   <script type="module">
-    import { init } from '../packages/core/dist/index.mjs'
+    import { init, encryptFun, decryptionFun, lestenPv, lestenExposure } from '../packages/core/dist/index.mjs'
 
     init({
       // 上报地址
@@ -55,7 +60,11 @@
       record: {
         open: true,
         time: 10 * 1000
-      }
+      },
+      encryptMethod: 'base64',
+      method: 'beacon',
+      isPv: true,
+      isExposure: true
     })
 
     const btn1 = document.querySelector('#btn1')
@@ -66,6 +75,8 @@
     const btn6 = document.querySelector('#btn6')
     const btn7 = document.querySelector('#btn7')
     const btn8 = document.querySelector('#btn8')
+    const btn9 = document.querySelector('#btn9')
+    const btn10 = document.querySelector('#btn10')
 
     btn1.addEventListener('click', function () {
       let link = document.createElement('link')
@@ -118,12 +129,46 @@
     })
 
     btn8.addEventListener('click', async function () {
-      const result = await fetch('http://localhost:8888/getLogData')
-      const data = await result.json()
-      if (!data.data) return
-      const videoData = LZString.decompress(data.data.snapshot);
-      const player = new rrweb.Replayer(JSON.parse(videoData));
-      player.play();
+      try {
+        const result = await fetch('http://localhost:8888/getLogData')
+        const data = await result.json()
+        if (!data.data) return
+        const { baseInfo, reportInfo } = data.data
+        const videoData = decryptionFun(reportInfo.snapshot);
+        const player = new rrweb.Replayer(JSON.parse(videoData));
+        player.play();
+      } catch (e) {
+        console.log(e)
+      }
+    })
+
+
+    btn9.addEventListener('click', function () {
+      lestenPv({
+        message: '测试',
+        url: 'localhost:8888/getLogData'
+      })
+    })
+
+    lestenExposure({
+      target: document.querySelector('#btn10'),
+      message: '曝光按钮',
+      threshold: 0.5,
+      params: { a: 123 }
+    })
+
+    btn10.addEventListener('click', function () {
+      lestenExposure([{
+        target: this,
+        message: '曝光按钮',
+        threshold: 0.5,
+        params: { a: 123 }
+      }, {
+        target: document.querySelector('#btn5'),
+        message: '曝光按钮2',
+        threshold: 0.5,
+        params: { a: 222 }
+      }])
     })
 
   </script>

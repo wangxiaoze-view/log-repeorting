@@ -37,6 +37,7 @@ function reWriteFun(type: string) {
     case EVENT_TYPES.FETCH:
       listenFetch(k);
       break;
+
     default:
       break;
   }
@@ -117,7 +118,10 @@ function listenXhr(type: EVENT_TYPES) {
         method: _config.method!.toLowerCase(),
         url: _config.url || '',
         status: this.status,
-        params: JSON.stringify(body || _config.params),
+        params:
+          typeof (body || _config.params) === 'string'
+            ? body || _config.params
+            : JSON.stringify(body || _config.params),
         message: this.statusText,
       };
     };
@@ -158,7 +162,7 @@ function listenXhr(type: EVENT_TYPES) {
       },
       false,
     );
-    return ajaxSend.apply(this, body);
+    return ajaxSend.call(this, body);
   };
 }
 
@@ -174,7 +178,7 @@ function listenFetch(type: EVENT_TYPES) {
   };
 
   _global.fetch = function traceFetch(target, options = {}) {
-    const { method = 'GET' } = options;
+    const { method = 'GET' } = options || { method: 'GET', body: {} };
 
     _config.method = method.toLowerCase();
     _config.url = target.toString();

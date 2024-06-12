@@ -10,6 +10,10 @@ export enum EVENT_TYPES {
   XHR = 'xhr',
   // fetch
   FETCH = 'fetch',
+  // pv统计
+  PV = 'pv',
+  // exposure 曝光
+  EXPOSURE = 'exposure',
 }
 
 export enum ERROR_TYPES {
@@ -23,4 +27,6 @@ export enum ERROR_TYPES {
   XHR = 'xhr_error',
   // fetch
   FETCH = 'fetch_error',
+  // exposure 曝光
+  EXPOSURE = 'exposure',
 }

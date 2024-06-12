@@ -12,7 +12,7 @@ export class RecordScreen {
 
   // 初始化
   init() {
-    const time = _support.baseInfo.options.record.time;
+    const time = _support.baseInfo.options.record!.time ?? 10 * 1000;
     this.closeCallback = RRweb.record({
       emit: (event, isCheckout) => {
         // isCheckout 是一个标识，告诉你重新制作了快照
@@ -52,8 +52,6 @@ export class RecordScreen {
     this.closeCallback?.();
     this.closeCallback = undefined;
   }
-
-  // TODO: 后续添加压缩解压数据
 }
 let record: RecordScreen;
 

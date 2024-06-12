@@ -4,31 +4,42 @@ import { Logger } from '@log-reporting/logger';
 import { Reource } from '@log-reporting/core/share/reource';
 import { PerformanceClass } from '@log-reporting/core/share/performance';
 import { RecordScreen } from '@log-reporting/core/lib/record';
+import { Exposure } from 'packages/core/lib/exposure';
 
 export interface IBaseOptions {
+  // 应用id 或者 密钥
+  appId?: string;
   // dsn
   dsn: string;
   // 是否启用调试
-  isDebug: boolean;
+  isDebug?: boolean;
   // 是否捕获错误
-  isError: boolean;
+  isError?: boolean;
   // 是否捕获console.error
-  isConsoleError: boolean;
+  isConsoleError?: boolean;
   // 是否捕获性能
-  isPerformance: boolean;
+  isPerformance?: boolean;
   // 是否捕获资源
-  isResource: boolean;
+  isResource?: boolean;
   // 是否捕获请求
-  isXhr: boolean;
+  isXhr?: boolean;
   // 是否捕获路由
   // isHistory: boolean;
   // 屏幕录制
-  record: {
+  record?: {
     // 是否开启
     open: boolean;
     // 录制时间
     time: number;
   };
+  // 加密方式
+  encryptMethod?: 'lz' | 'base64';
+  // 上报方式
+  method?: 'beacon' | 'xhr';
+  // pv统计
+  isPv?: boolean;
+  // 曝光
+  isExposure?: boolean;
 }
 
 export type LogReportingType = {
@@ -37,6 +48,7 @@ export type LogReportingType = {
   reource: Reource;
   performance: PerformanceClass;
   record: RecordScreen;
+  exposure: Exposure;
 };
 
 export interface IWindow extends Window {
@@ -123,4 +135,16 @@ export interface IConsoleErrorType {
 export interface RecordEventScope {
   time: string;
   eventList: any[];
+}
+
+export interface IPv {
+  message?: string;
+  [k: string]: any;
+}
+
+export interface IExposure extends IPv {
+  threshold?: number;
+  target?: any; // 曝光的元素
+  params?: Record<string, any>;
+  time?: number;
 }

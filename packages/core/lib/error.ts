@@ -36,8 +36,8 @@ export function getErrorStackLine(e: Error): Partial<IConsoleErrorType> {
 }
 
 // 处理绑定元素的模板信息
-export function getErrorElInfo(): IELBindType {
-  const errorEl = getErrorEle();
+export function getErrorElInfo(elTarget?: Node | Element): IELBindType {
+  const errorEl = elTarget || getErrorEle();
   let elOptions: Partial<IELBindType> = {};
   if (errorEl) {
     elOptions = {
@@ -51,14 +51,14 @@ export function getErrorElInfo(): IELBindType {
       layerX: errorEl.x,
       layerY: errorEl.y,
       // 元素节点
-      nodeName: errorEl.target!.nodeName,
-      nodeType: errorEl.target!.nodeType,
+      nodeName: errorEl.nodeName ?? errorEl!.target!.nodeName,
+      nodeType: errorEl.nodeType ?? errorEl!.target!.nodeType,
       // 元素内容
-      textContent: errorEl.target!.textContent,
+      textContent: errorEl.textContent ?? errorEl!.target!.textContent,
       // 元素calss
-      className: errorEl.target!.classList.value,
+      className: errorEl.className ?? errorEl!.target!.className,
       // 元素id
-      elId: errorEl.target!.id,
+      elId: errorEl.id ?? errorEl.target!.id,
     };
   }
   return elOptions as Required<IELBindType>;

@@ -43,7 +43,7 @@ function pushError(type: EVENT_TYPES) {
     if (_support.baseInfo.options.isDebug) {
       logger.error('js逻辑错误：', JSON.stringify(errorOptions));
     }
-    sendReport(errorOptions);
+    sendReport(type, errorOptions);
   });
 }
 
@@ -52,7 +52,7 @@ function pushConsole(type: EVENT_TYPES) {
     if (_support.baseInfo.options.isDebug) {
       logger.info('console错误：', JSON.stringify(errorOptions));
     }
-    sendReport(errorOptions);
+    sendReport(type, errorOptions);
   });
 }
 
@@ -61,7 +61,7 @@ function pushUnhandledrejection(type: EVENT_TYPES) {
     if (_support.baseInfo.options.isDebug) {
       logger.error('Promise错误：', JSON.stringify(errorOptions));
     }
-    sendReport(errorOptions);
+    sendReport(type, errorOptions);
   });
 }
 
@@ -71,7 +71,7 @@ function pushXhr(type: EVENT_TYPES) {
     if (_support.baseInfo.options.isDebug) {
       logger.error('xhr接口错误：', JSON.stringify(errorOptions));
     }
-    sendReport(errorOptions);
+    sendReport(type, errorOptions);
   });
 }
 
@@ -81,6 +81,6 @@ function pushFetch(type: EVENT_TYPES) {
     if (_support.baseInfo.options.isDebug) {
       logger.error('fetch接口错误：', JSON.stringify(errorOptions));
     }
-    sendReport(errorOptions);
+    sendReport(type, errorOptions);
   });
 }

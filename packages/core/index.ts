@@ -7,6 +7,9 @@ import pck from './package.json';
 import { IBaseOptions } from '@log-reporting/types';
 import { initPerformance } from './lib/initPerformance';
 import { initRecord } from './lib/record';
+import { decryptionFun, encryptFun } from './lib/send';
+import { initExposure, lestenExposure } from './lib/exposure';
+import { initPv, lestenPv } from './lib/pv';
 class Main {
   constructor() {}
 
@@ -23,6 +26,10 @@ class Main {
     initReWrite();
     // 触发
     initPushError();
+    // pv统计
+    initPv();
+    // 曝光
+    initExposure();
     // 视频录制
     initRecord();
     // 初始化完成标识
@@ -42,6 +49,9 @@ const initBaseData: IBaseOptions = {
     open: true,
     time: 10 * 1000,
   },
+  encryptMethod: 'lz',
+  method: 'beacon',
+  isPv: false,
   // isHistory: false,
 };
 
@@ -56,4 +66,16 @@ const init = (options: IBaseOptions = initBaseData) => {
   main.init(options);
 };
 
-export { init, _global, _support, _name, _version, _author, _description };
+export {
+  init,
+  encryptFun,
+  decryptionFun,
+  lestenPv,
+  lestenExposure,
+  _global,
+  _support,
+  _name,
+  _version,
+  _author,
+  _description,
+};
