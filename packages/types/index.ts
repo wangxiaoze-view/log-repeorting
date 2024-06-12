@@ -4,7 +4,7 @@ import { Logger } from '@log-reporting/logger';
 import { Reource } from '@log-reporting/core/share/reource';
 import { PerformanceClass } from '@log-reporting/core/share/performance';
 import { RecordScreen } from '@log-reporting/core/lib/record';
-import { Exposure } from 'packages/core/lib/exposure';
+import { Exposure } from '@log-reporting/core/lib/exposure';
 
 export interface IBaseOptions {
   // 应用id 或者 密钥
