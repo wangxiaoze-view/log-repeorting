@@ -86,7 +86,13 @@ for (const pck of packages) {
         format: 'esm',
         sourcemap,
       },
-      plugins: [dts()],
+      plugins: [
+        dts({
+          compilerOptions: {
+            preserveSymlinks: false,
+          },
+        }),
+      ],
       external,
     },
   ].filter(i => i);
