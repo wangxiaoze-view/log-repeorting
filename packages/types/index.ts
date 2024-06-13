@@ -107,7 +107,7 @@ export interface IErrorType {
   isTrusted: boolean;
   errorMessage: string;
   stackMessage: string;
-  filename: string;
+  fileName: string;
   colno: number;
   lineno: number;
   time: number;

@@ -14,7 +14,7 @@ export function formatStack(stack?: string, line: number = 1): string {
     .join('~~');
 }
 
-export function getErrorStackLine(e: Error): Partial<IConsoleErrorType> {
+export function getErrorStackLine(e: Error): IConsoleErrorType {
   const regex = /http[s]?:\/\/[^:]+(:\d+)?\/([^:]+):(\d+):(\d+)/;
   const match = formatStack(e.stack).split('~~')[1].match(regex);
   if (match) {
@@ -32,7 +32,14 @@ export function getErrorStackLine(e: Error): Partial<IConsoleErrorType> {
 
     return errorOptions;
   }
-  return {};
+  return {
+    errorMessage: '',
+    time: Date.now(),
+    colno: 0,
+    lineno: 0,
+    stackMessage: '',
+    fileName: '',
+  };
 }
 
 // 处理绑定元素的模板信息
@@ -66,6 +73,26 @@ export function getErrorElInfo(elTarget?: Node | Element): IELBindType {
 
 // 处理通用错误信息与当前的节点进行绑定
 export function getError(e: ErrorEvent): IErrorType {
+  const isOriginError = getErrorStackLine(e as unknown as Error);
+  let errorOptions: IConsoleErrorType;
+  if (Object.keys(isOriginError).length > 0) {
+    errorOptions = isOriginError;
+  } else {
+    errorOptions = {
+      // 错误信息
+      errorMessage: e.error ? e.error.message : '',
+      // 错误位置
+      stackMessage: formatStack(e.error?.stack),
+      // 错误行数
+      lineno: e.lineno,
+      // 错误列数
+      colno: e.colno,
+      // 错误文件
+      fileName: e.filename,
+      time: Date.now(),
+    };
+  }
+
   return {
     // 该事件是否会在 DOM 中冒泡
     bubbles: e.bubbles,
@@ -73,16 +100,7 @@ export function getError(e: ErrorEvent): IErrorType {
     eventType: e.type,
     // 事件是否由用户行为生成
     isTrusted: e.isTrusted,
-    // 错误信息
-    errorMessage: e.error?.message,
-    // 错误栈
-    stackMessage: formatStack(e.error?.stack),
-    // 脚本文件
-    filename: e.filename,
-    // 列
-    colno: e.colno,
-    // 行
-    lineno: e.lineno,
+    ...errorOptions,
     // 发生的时间
     time: Date.now(),
     // 触发事件的时间戳
@@ -121,7 +139,7 @@ export function getPromiseError(e: PromiseRejectionEvent): IErrorType {
     // 错误栈
     stackMessage: stack,
     // 错误文件
-    filename: filename,
+    fileName: filename,
     // 行
     lineno: Number(column),
     // 列
