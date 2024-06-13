@@ -10,13 +10,13 @@ import { IExposure } from '@log-reporting/types';
  *
  */
 export declare class Exposure {
-    private options;
-    observerMap: WeakMap<IExposure, IntersectionObserver>;
-    targetMap: IExposure[];
-    constructor();
-    init(item: IExposure): IntersectionObserver;
-    observer(targetData: IExposure[] | IExposure): void;
-    unobserver(target: Element[] | Element): void;
+  private options;
+  observerMap: WeakMap<IExposure, IntersectionObserver>;
+  targetMap: IExposure[];
+  constructor();
+  init(item: IExposure): IntersectionObserver;
+  observer(targetData: IExposure[] | IExposure): void;
+  unobserver(target: Element[] | Element): void;
 }
 export declare let exposure: Exposure;
 export declare function initExposure(): void;
