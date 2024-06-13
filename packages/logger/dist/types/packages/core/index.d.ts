@@ -8,4 +8,16 @@ declare const _version: string;
 declare const _author: string;
 declare const _description: string;
 declare const init: (options?: IBaseOptions) => void;
-export { init, encryptFun, decryptionFun, lestenPv, lestenExposure, _global, _support, _name, _version, _author, _description, };
+export {
+  init,
+  encryptFun,
+  decryptionFun,
+  lestenPv,
+  lestenExposure,
+  _global,
+  _support,
+  _name,
+  _version,
+  _author,
+  _description,
+};

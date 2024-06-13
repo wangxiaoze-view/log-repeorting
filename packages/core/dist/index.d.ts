@@ -16,4 +16,16 @@ declare const _author: string;
 declare const _description: string;
 declare const init: (options?: IBaseOptions) => void;
 
-export { _author, _description, _global, _name, _support, _version, decryptionFun, encryptFun, init, lestenExposure, lestenPv };
+export {
+  _author,
+  _description,
+  _global,
+  _name,
+  _support,
+  _version,
+  decryptionFun,
+  encryptFun,
+  init,
+  lestenExposure,
+  lestenPv,
+};
