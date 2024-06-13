@@ -35,7 +35,7 @@
     "采集"
   ],
   "publishConfig": {
-    "registry": "https://mirrors.cloud.tencent.com/npm/"
+    "registry": "https://registry.npmjs.org/"
   },
   "bugs": {
     "url": "https://github.com/wangxiaoze-view/log-repeorting/issues"
