@@ -27,6 +27,4 @@ export enum ERROR_TYPES {
   XHR = 'xhr_error',
   // fetch
   FETCH = 'fetch_error',
-  // exposure 曝光
-  EXPOSURE = 'exposure',
 }
