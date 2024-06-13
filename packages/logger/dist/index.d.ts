@@ -1,12 +1,12 @@
 import { LoggerType, LogFun } from '@log-reporting/types';
 
 declare class Logger {
-    constructor();
-    log(title: string, content: string): void;
-    info(title: string, content: string): void;
-    warn(title: string, content: string): void;
-    error(title: string, content: string): void;
-    success(title: string, content: string): void;
+  constructor();
+  log(title: string, content: string): void;
+  info(title: string, content: string): void;
+  warn(title: string, content: string): void;
+  error(title: string, content: string): void;
+  success(title: string, content: string): void;
 }
 declare const logger: LoggerType;
 declare const log: LogFun;

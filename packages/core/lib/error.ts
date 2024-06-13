@@ -75,7 +75,8 @@ export function getErrorElInfo(elTarget?: Node | Element): IELBindType {
 export function getError(e: ErrorEvent): IErrorType {
   const isOriginError = getErrorStackLine(e as unknown as Error);
   let errorOptions: IConsoleErrorType;
-  if (Object.keys(isOriginError).length > 0) {
+  // fix: 有错误信息优先取值
+  if (isOriginError.stackMessage) {
     errorOptions = isOriginError;
   } else {
     errorOptions = {
