@@ -1,6 +1,6 @@
 {
   "name": "@log-reporting/types",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "前端日志上报SDK",
   "homepage": "https://github.com/wangxiaoze-view/log-repeorting#readme",
   "main": "./dist/index.ts",
@@ -12,6 +12,10 @@
     },
     "./*": "./*"
   },
+  "files": [
+    "dist",
+    "*.d.ts"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
