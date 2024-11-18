@@ -4,6 +4,7 @@ import { decryptionFun, encryptFun } from './lib/send';
 import { lestenExposure } from './lib/exposure';
 import { lestenPv } from './lib/pv';
 export * from './enum';
+export { getNavigator } from './share/navigator';
 declare const _name: string;
 declare const _version: string;
 declare const _author: string;

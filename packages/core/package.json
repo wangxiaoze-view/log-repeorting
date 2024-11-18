@@ -1,6 +1,6 @@
 {
   "name": "@log-reporting/core",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "前端日志上报SDK",
   "homepage": "https://github.com/wangxiaoze-view/log-repeorting#readme",
   "main": "./dist/index.cjs",
@@ -48,5 +48,8 @@
     "js-base64": "^3.7.7",
     "lz-string": "^1.5.0",
     "rrweb": "^2.0.0-alpha.4"
+  },
+  "devDependencies": {
+    "@rrweb/types": "2.0.0-alpha.17"
   }
 }

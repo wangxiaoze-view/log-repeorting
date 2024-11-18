@@ -1,9 +1,7 @@
 import { _support } from '../share/global';
 import { getNavigator } from '../share/navigator';
-//@ts-expect-error ts版本过低
 import lz from 'lz-string';
 import { EVENT_TYPES } from '../enum';
-//@ts-expect-error ts版本过低
 import { Base64 } from 'js-base64';
 import { logger } from '@log-reporting/logger';
 

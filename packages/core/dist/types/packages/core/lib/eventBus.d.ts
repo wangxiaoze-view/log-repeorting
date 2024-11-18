@@ -10,5 +10,5 @@ export declare class EventBus {
     off(event: EVENT_TYPES, callback: AnyFun): void;
     once(event: EVENT_TYPES, callback: AnyFun): void;
 }
-declare const eventBus: any;
+declare const eventBus: EventBus;
 export { eventBus };

@@ -8,6 +8,7 @@ import { Exposure } from '@log-reporting/core/lib/exposure';
 export interface IBaseOptions {
     appId?: string;
     dsn: string;
+    isReport?: boolean;
     isDebug?: boolean;
     isError?: boolean;
     isConsoleError?: boolean;
