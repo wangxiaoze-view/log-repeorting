@@ -1,7 +1,9 @@
 import { _support } from '../share/global';
 import { getNavigator } from '../share/navigator';
+//@ts-expect-error ts版本过低
 import lz from 'lz-string';
 import { EVENT_TYPES } from '../enum';
+//@ts-expect-error ts版本过低
 import { Base64 } from 'js-base64';
 import { logger } from '@log-reporting/logger';
 // TODO: 这里的参数需要修改，是否支持手动上报/自定义？

@@ -2,6 +2,7 @@ const { log: _log } = console;
 import { LogFun, LoggerType } from '@log-reporting/types';
 import pck from './package.json';
 
+// 日志
 export class Logger {
   constructor() {}
   log(title: string, content: string) {

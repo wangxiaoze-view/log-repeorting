@@ -10,6 +10,7 @@ import { initRecord } from './lib/record';
 import { decryptionFun, encryptFun } from './lib/send';
 import { initExposure, lestenExposure } from './lib/exposure';
 import { initPv, lestenPv } from './lib/pv';
+export * from './enum';
 class Main {
   constructor() {}
 
@@ -68,11 +69,17 @@ const init = (options: IBaseOptions = initBaseData) => {
 
 export {
   init,
+  // 加密
   encryptFun,
+  // 解密
   decryptionFun,
+  // 搜集pv
   lestenPv,
+  // 搜集曝光
   lestenExposure,
+  // thisGlobal
   _global,
+  // 全局的详情信息
   _support,
   _name,
   _version,

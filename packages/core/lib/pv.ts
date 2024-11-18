@@ -7,7 +7,7 @@ import { eventBus } from './eventBus';
 // 搜集到之后进行上报
 export function initPv() {
   if (!_support.baseInfo.options.isPv) return;
-  eventBus.on(EVENT_TYPES.PV, options => {
+  eventBus.on(EVENT_TYPES.PV, (options: any) => {
     sendReport(EVENT_TYPES.PV, { ...options, snapshot: [] });
   });
 }

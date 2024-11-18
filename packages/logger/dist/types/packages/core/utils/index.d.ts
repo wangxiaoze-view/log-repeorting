@@ -12,22 +12,17 @@ import { AnyFun, IBaseOptions } from '@log-reporting/types';
  */
 export declare function verifyBase(options: IBaseOptions): boolean;
 export declare function isKeyValid(key: string, obj: object): boolean;
-export declare function on(
-  target: Window | Document | HTMLElement,
-  event: string,
-  callback: AnyFun,
-  options?: boolean,
-): void;
+export declare function on(target: Window | Document | HTMLElement, event: string, callback: AnyFun, options?: boolean): void;
 export declare function getNavigation(entry: Record<string, any>): {
-  dns: number;
-  tcp: number;
-  ssl: any;
-  ttfb: number;
-  render: any;
-  dom: any;
-  load: number;
-  total: number;
+    dns: number;
+    tcp: number;
+    ssl: any;
+    ttfb: number;
+    render: any;
+    dom: any;
+    load: number;
+    total: number;
 };
 export declare function getParams(search: string): {
-  [key: string]: string;
+    [key: string]: string;
 };

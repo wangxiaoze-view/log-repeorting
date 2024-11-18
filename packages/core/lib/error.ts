@@ -15,9 +15,20 @@ export function formatStack(stack?: string, line: number = 1): string {
 }
 
 export function getErrorStackLine(e: Error): IConsoleErrorType {
-  const regex = /http[s]?:\/\/[^:]+(:\d+)?\/([^:]+):(\d+):(\d+)/;
-  const match = formatStack(e.stack).split('~~')[1].match(regex);
-  if (match) {
+  const defaultReturen = {
+    errorMessage: '',
+    time: Date.now(),
+    colno: 0,
+    lineno: 0,
+    stackMessage: '',
+    fileName: '',
+  };
+  try {
+    const regex = /http[s]?:\/\/[^:]+(:\d+)?\/([^:]+):(\d+):(\d+)/;
+    const stack = formatStack(e.stack).split('~~')[1];
+    if (!stack) return defaultReturen;
+    const match = stack.match(regex);
+    if (!match) return defaultReturen;
     const fileName = match[2];
     const lineno = parseInt(match[3], 10);
     const colno = parseInt(match[4], 10);
@@ -31,15 +42,9 @@ export function getErrorStackLine(e: Error): IConsoleErrorType {
     };
 
     return errorOptions;
+  } catch (_) {
+    return defaultReturen;
   }
-  return {
-    errorMessage: '',
-    time: Date.now(),
-    colno: 0,
-    lineno: 0,
-    stackMessage: '',
-    fileName: '',
-  };
 }
 
 // 处理绑定元素的模板信息
