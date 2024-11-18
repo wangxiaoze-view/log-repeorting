@@ -11,6 +11,8 @@ export interface IBaseOptions {
   appId?: string;
   // dsn
   dsn: string;
+  // 是否上报
+  isReport?: boolean;
   // 是否启用调试
   isDebug?: boolean;
   // 是否捕获错误

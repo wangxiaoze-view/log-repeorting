@@ -11,6 +11,7 @@ import { decryptionFun, encryptFun } from './lib/send';
 import { initExposure, lestenExposure } from './lib/exposure';
 import { initPv, lestenPv } from './lib/pv';
 export * from './enum';
+export { getNavigator } from './share/navigator';
 class Main {
   constructor() {}
 

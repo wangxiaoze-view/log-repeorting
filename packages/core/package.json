@@ -1,6 +1,6 @@
 {
   "name": "@log-reporting/core",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "前端日志上报SDK",
   "homepage": "https://github.com/wangxiaoze-view/log-repeorting#readme",
   "main": "./dist/index.cjs",
